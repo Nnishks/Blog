@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logoutAction } from "../Store/Auth/Action";
+import { loginViaGB, logoutAction } from "../Store/Auth/Action";
 import { useNavigate} from "react-router-dom"
 
 const Naavbar = () => {
@@ -13,9 +13,20 @@ const Naavbar = () => {
   const navigate = useNavigate();
   const { Info } = useSelector((store) => store.auth);
   console.log(Info);
+  let check = JSON.parse(localStorage.getItem("UserInfo"));
+
+  useEffect(() => {
+    dispatch(loginViaGB);
+    console.log(Info)
+    return () => {
+      
+    }
+  }, [])
+  
+
   function logoutSubmit (){
     dispatch(logoutAction);
-    let check = JSON.parse(localStorage.getItem("UserInfo"));
+    
     if(!check){
       navigate("/")
     }
@@ -43,7 +54,10 @@ const Naavbar = () => {
               </Nav.Link>
             )}
 
-            <Nav.Link href="#pricing">Read blog</Nav.Link>
+            <Nav.Link as={Link} to="/Allblog">All blog</Nav.Link>
+            {check && <Nav.Link href="">Read blog</Nav.Link>}
+            {check && <Nav.Link as={Link} to="/Addblog">Add blog</Nav.Link>}
+            
           </Nav>
         </Container>
       </Navbar>

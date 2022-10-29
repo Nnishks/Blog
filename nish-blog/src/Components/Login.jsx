@@ -77,7 +77,7 @@ const Login = () => {
     </Form>
          <br/>
     <Button variant="dark">Google</Button>{' '}
-    <a href='https://github.com/login/oauth/authorize?client_id=39b7642483ea15c083e8'>
+    <a href="https://github.com/login/oauth/authorize?client_id=39b7642483ea15c083e8">
       <Button variant="secondary">Github</Button></a>
      <br/><br/>
       <a href=''><h2>Forgot password?</h2></a>
